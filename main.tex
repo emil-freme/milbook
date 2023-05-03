@@ -87,6 +87,7 @@
 
 %Custom settings start here
 
+\usepackage{fontspec}
 \usepackage{layout}
 \usepackage{geometry}
 \usepackage{environ}
@@ -95,11 +96,13 @@
 \definecolor{mbg}{rgb}{0.95, 0.95, 0.95}
 \usepackage{minted}
 
+\setmainfont{Atkinson Hyperlegible}[]
+\setmonofont{JetBrainsMono Nerd Font Mono}[]
+
 \setminted{ breaklines,
             breakanywhere,
             bgcolor=mbg,
             linenos,
-            frame=lines,
             numbersep=1mm}
 
 
@@ -121,14 +124,19 @@
     }
 }
 
+\let\osection\section
 
+\renewcommand{\section}[1]{
+    \newpage
+    \osection{#1}
+}
 
 
 \begin{document}
 
+
 \tableofcontents
 
-\layout
 
 $body$
 \end{document}
