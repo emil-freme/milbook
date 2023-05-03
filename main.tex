@@ -89,17 +89,37 @@
 
 \usepackage{layout}
 \usepackage{geometry}
+\usepackage{environ}
 \usepackage{marginnote}
+\usepackage{tcolorbox}
+\definecolor{mbg}{rgb}{0.95, 0.95, 0.95}
+\usepackage{minted}
+
+\setminted{ breaklines,
+            breakanywhere,
+            bgcolor=mbg,
+            linenos,
+            frame=lines,
+            numbersep=1mm}
+
+
+
 \geometry{
     papersize={177mm,254mm},
     twoside,
     includeall,
     inner=15mm,
-    top=1in
+    top=0.5in,
+    marginparsep=10mm
 }
 
-\newenvironment{warning}{
-    \marginnote{ }{}}
+\NewEnviron{warning}{
+    \marginnote{
+        \begin{tcolorbox}[title=Warning]
+        \BODY
+        \end{tcolorbox}
+    }
+}
 
 
 
