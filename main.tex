@@ -1,4 +1,5 @@
 % Options for packages loaded elsewhere
+
 \PassOptionsToPackage{unicode}{hyperref}
 \PassOptionsToPackage{hyphens}{url}
 %
@@ -87,6 +88,7 @@
 
 %Custom settings start here
 
+\usepackage{longtable}
 \usepackage{fontspec}
 \usepackage{layout}
 \usepackage{geometry}
@@ -108,21 +110,62 @@
 
 
 \geometry{
-    papersize={177mm,254mm},
+    papersize={241mm,305mm},
     twoside,
     includeall,
     inner=15mm,
+    outer=20mm,
     top=0.5in,
     marginparsep=10mm
 }
 
+\definecolor{side-yellow}{rgb}{0.87, 0.85, 0.53}
+\definecolor{side-yellow-line}{rgb}{0.34, 0.33, 0.10}
+\definecolor{side-red}{rgb}{0.65, 0.14, 0.27}
+\definecolor{side-red-line}{rgb}{0.36, 0.07, 0.05}
+\definecolor{blue-bg-title}{RGB}{167, 111, 199}
+\definecolor{blue-main}{RGB}{199, 183, 208}
+
+
+\NewEnviron{activity}{
+         \begin{tcolorbox}[colbacktitle=blue-bg-title,
+             coltitle=black,
+             colback=blue-main,
+             colframe=blue-bg-title!90,
+             title=Atividade!]
+         \BODY
+         \end{tcolorbox}
+ }
+\NewEnviron{commentbox}{
+         \begin{tcolorbox}
+         \BODY
+         \end{tcolorbox}
+ }
+
+
 \NewEnviron{warning}{
     \marginnote{
-        \begin{tcolorbox}[title=Warning]
+        \begin{tcolorbox}[colbacktitle=side-red,
+            coltitle=white,
+            colframe=side-red-line,
+            title=Atenção!]
         \BODY
         \end{tcolorbox}
     }
 }
+
+\definecolor{black}{rgb}{0, 0, 0}
+\NewEnviron{tip}{
+    \marginnote{
+        \begin{tcolorbox}[colbacktitle=side-yellow,
+            coltitle=black,
+            colframe=side-yellow-line,
+            title=Dica!]
+        \BODY
+        \end{tcolorbox}
+    }
+}
+
 
 \let\osection\section
 
