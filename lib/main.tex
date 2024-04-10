@@ -5,6 +5,9 @@
 %
 \documentclass[
 ]{book}
+\title{$title$}
+\author{$author$}
+\usepackage[portuguese]{babel}
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
 \ifPDFTeX
@@ -185,9 +188,11 @@
     \osection{#1}
 }
 
+\graphicspath{{$graphicspath$}}
 
 \begin{document}
 
+\maketitle
 
 \tableofcontents
 

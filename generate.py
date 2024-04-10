@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import configparser
 import easygui
 import glob
@@ -5,12 +6,9 @@ import os
 import shutil
 import subprocess
 
-# Concatenate MDs
-print("Concating MDs")
-
 config = configparser.ConfigParser()
 
-if not config.read("config.ini"):
+if not config.read("config.ini", encoding="utf-8"):
     src_path = easygui.diropenbox("Selecione uma pasta com os fontes",
                                   "Milbook", "src")
     out_path = easygui.diropenbox("Selecione uma pasta destino",
@@ -18,38 +16,51 @@ if not config.read("config.ini"):
     out_name = easygui.enterbox("Nome do arquivo de saida", "Milbook",
                                 "handout", True)
 
+    author = easygui.enterbox("Nome do Autor", "Milbook")
+    title = easygui.enterbox("Titulo do Projeto", "Milbook")
+    date = easygui.enterbox("Data", "Milbook")
+
     config["Default"] = {"src_path": src_path, 
                          "out_path": out_path, 
                          "out_name": out_name
                          }
+    config["Metadata"] = {"author": author, 
+                          "title": title,
+                          "date": date
+                          }
+
     with open("config.ini", "w") as configfile:
         config.write(configfile)
 else:
     src_path = config["Default"]["src_path"]
     out_path = config["Default"]["out_path"]
     out_name = config["Default"]["out_name"]
-
-
-
-
-
-          
+    author = config["Metadata"]["author"]
+    title = config["Metadata"]["title"]
+    date = config["Metadata"]["date"]
+# Concatenate MDs
+print("Concating MDs")
 
 with open("preout.md", "wb") as preout:
 
-    for file in os.listdir(src_path):
-        with open(f"{src_path}/{file}", "rb") as temp:
+    for file in glob.glob(os.path.join(src_path, "*.md")):
+        with open(f"{file}", "rb") as temp:
             print(f"--{file}")
             shutil.copyfileobj(temp, preout)
 
+src_path_latexed = src_path.replace("\\", "/")
 
+print(src_path_latexed)
 print("Generating Tex File")
 subprocess.run(["pandoc", 
                 "--lua-filter", "lib/div2latexenv.lua",
 		        "--lua-filter", "lib/minted.lua",
 		        "--template", "lib/main.tex",
+                "--variable", f"graphicspath={src_path_latexed}",
+                "--metadata", f"author={author}",
+                "--metadata", f"title={title}",
+                "--metadata", f"date={date}",
 		        "preout.md", "-o", "out.tex"])
-
 
 print("Generating PDF")
 subprocess.run(["xelatex", "-shell-escape", "out.tex"])
