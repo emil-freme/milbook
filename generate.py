@@ -47,10 +47,10 @@ with open("preout.md", "wb") as preout:
         with open(f"{file}", "rb") as temp:
             print(f"--{file}")
             shutil.copyfileobj(temp, preout)
+            preout.write(b"\n\n")
 
 src_path_latexed = src_path.replace("\\", "/")
 
-print(src_path_latexed)
 print("Generating Tex File")
 subprocess.run(["pandoc", 
                 "--lua-filter", "lib/div2latexenv.lua",
