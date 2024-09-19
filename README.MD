@@ -1,5 +1,7 @@
 # MilBook
 
+![MillBook](images/sample_image.png)
+
 MilBook is a Python-based automation tool designed to generate PDF handouts from a set of Markdown files. It allows users to input metadata like author, title, and date, and uses Pandoc and LaTeX for the final PDF generation.
 
 ## Features
@@ -22,7 +24,7 @@ To run MilBook, the following dependencies must be installed:
 - **configparser** (built-in Python module)
 - **shutil** and **glob** (built-in Python modules)
 
-### Installation
+## Installation
 
 1. Install the required Python libraries:
     ```bash
@@ -44,7 +46,7 @@ To run MilBook, the following dependencies must be installed:
 Make sure that the `lib` directory contains these template and filter files. You can modify the LaTeX template and Lua filters to fit your project's needs.
 
 
-### Usage
+## Usage
 
 1. Run the Python script:
     ```bash
@@ -73,13 +75,24 @@ After generating the PDF, MilBook cleans up intermediate files such as `out.tex`
 ### Example
 
 1. Source Markdown files:
-    - `src/file1.md`
-    - `src/file2.md`
+    - `src/sample.md`
 
 2. Output: 
-    - PDF will be generated at the chosen output folder, e.g., `out/final_handout.pdf`.
+    - PDF will be generated at the chosen output folder, e.g., `out/handout.pdf`.
 
-### License
+## TODO
+
+    - Make better placements of tips and warnings
+    - Create more callouts
+
+## Reporting Issues
+
+If you find a bug or have a feature request, please open an issue in the GitHub repository. Provide as much detail as possible, including steps to reproduce the issue.
+
+Thank you for contributing to MilBook! Your help is greatly appreciated.
+
+
+## License
 
 MilBook is open-source and licensed under the MIT License.
 

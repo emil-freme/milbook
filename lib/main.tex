@@ -6,7 +6,8 @@
 \documentclass[
 ]{book}
 \title{$title$}
-\author{$author$}
+\author{$author$ \\ \\{Made with MilBook \includegraphics[height=1.5ex]{images/sample_image.png}}}
+\date{$date$}
 \usepackage[portuguese]{babel}
 \usepackage{amsmath,amssymb}
 \usepackage{iftex}
@@ -190,12 +191,22 @@
 
 \graphicspath{{$graphicspath$}}
 
+
 \begin{document}
 
 \maketitle
+
 
 \tableofcontents
 
 
 $body$
+
+\newpage
+\begin{center}
+\includegraphics[height=7cm]{images/sample_image.png}
+
+Made with MilBook
+\end{center}
+
 \end{document}
