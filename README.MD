@@ -1,0 +1,78 @@
+# MilBook
+
+MilBook is a Python-based automation tool designed to generate PDF handouts from a set of Markdown files. It allows users to input metadata like author, title, and date, and uses Pandoc and LaTeX for the final PDF generation.
+
+## Features
+
+- **GUI-based file selection:** Easily select source and output directories using `easygui`.
+- **Metadata input:** Enter author, project title, and date information.
+- **Markdown concatenation:** Concatenates multiple Markdown files from the source directory.
+- **Pandoc & LaTeX integration:** Converts concatenated Markdown files into LaTeX and compiles them to a PDF.
+- **Custom LaTeX filters:** Supports custom Lua filters for advanced LaTeX formatting.
+- **Automated cleanup:** Removes temporary files after PDF generation.
+
+## Requirements
+
+To run MilBook, the following dependencies must be installed:
+
+- **Python 3.x**
+- **Pandoc** (for Markdown to LaTeX conversion)
+- **XeLaTeX** (for compiling the LaTeX file into a PDF)
+- **easygui** (for simple GUI dialogs)
+- **configparser** (built-in Python module)
+- **shutil** and **glob** (built-in Python modules)
+
+### Installation
+
+1. Install the required Python libraries:
+    ```bash
+    pip install easygui
+    ```
+
+2. Install **Pandoc**:
+    - Download and install from [Pandoc's official website](https://pandoc.org/installing.html).
+
+3. Install **XeLaTeX**:
+    - If you're using a LaTeX distribution like TeX Live or MiKTeX, XeLaTeX should already be included.
+
+4. Ensure `lib/div2latexenv.lua`, `lib/minted.lua`, and `lib/main.tex` are present in the `lib` directory for the LaTeX template and filters.
+
+### Usage
+
+1. Run the Python script:
+    ```bash
+    ./milbook.py
+    ```
+
+2. Use the GUI dialogs to:
+   - Select the folder containing your Markdown files.
+   - Select the output folder where the PDF will be saved.
+   - Enter the name of the output file, the author, project title, and date.
+
+3. The tool will:
+   - Concatenate all `.md` files from the source folder.
+   - Convert the concatenated Markdown into LaTeX using Pandoc.
+   - Generate the final PDF using XeLaTeX.
+   - Save the PDF to your specified output folder with the chosen filename.
+
+### Configuration
+
+MilBook stores the selected paths and metadata in a `config.ini` file. If this file exists, the tool will automatically use the stored values, bypassing the GUI selection process.
+
+### Cleanup
+
+After generating the PDF, MilBook cleans up intermediate files such as `out.tex`, `preout.md`, and other temporary LaTeX files generated during compilation.
+
+### Example
+
+1. Source Markdown files:
+    - `src/file1.md`
+    - `src/file2.md`
+
+2. Output: 
+    - PDF will be generated at the chosen output folder, e.g., `out/final_handout.pdf`.
+
+### License
+
+MilBook is open-source and licensed under the MIT License.
+
