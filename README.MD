@@ -35,7 +35,14 @@ To run MilBook, the following dependencies must be installed:
 3. Install **XeLaTeX**:
     - If you're using a LaTeX distribution like TeX Live or MiKTeX, XeLaTeX should already be included.
 
-4. Ensure `lib/div2latexenv.lua`, `lib/minted.lua`, and `lib/main.tex` are present in the `lib` directory for the LaTeX template and filters.
+4. **Templates and Lua Filters:**
+    - The repository includes a LaTeX template (`lib/main.tex`) and Lua filters (`lib/minted.lua`, `lib/div2latexenv.lua`). These files are essential for the PDF generation process.
+    - `main.tex`: Custom LaTeX template that includes options for formatting Markdown with Pandoc.
+    - `minted.lua`: A Lua filter for enabling the use of the `minted` package for syntax highlighting.
+    - `div2latexenv.lua`: A Lua filter that converts fenced div blocks in Markdown to LaTeX environments.
+
+Make sure that the `lib` directory contains these template and filter files. You can modify the LaTeX template and Lua filters to fit your project's needs.
+
 
 ### Usage
 
