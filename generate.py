@@ -29,7 +29,7 @@ if not config.read("config.ini", encoding="utf-8"):
                           "date": date
                           }
 
-    with open("config.ini", "w") as configfile:
+    with open("config.ini", "w", encoding="utf-8") as configfile:
         config.write(configfile)
 else:
     src_path = config["Default"]["src_path"]
@@ -43,7 +43,9 @@ print("Concating MDs")
 
 with open("preout.md", "wb") as preout:
 
-    for file in glob.glob(os.path.join(src_path, "*.md")):
+    for file in sorted(glob.glob(os.path.join(src_path, "*.md"))):
+        if file == "preout.md":
+            continue
         with open(f"{file}", "rb") as temp:
             print(f"--{file}")
             shutil.copyfileobj(temp, preout)
@@ -60,6 +62,7 @@ subprocess.run(["pandoc",
                 "--metadata", f"author={author}",
                 "--metadata", f"title={title}",
                 "--metadata", f"date={date}",
+                "--top-level-division", "chapter",
 		        "preout.md", "-o", "out.tex"])
 
 print("Generating PDF")
