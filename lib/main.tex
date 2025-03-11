@@ -43,6 +43,20 @@
 \usepackage{xcolor}
 \usepackage{color}
 \usepackage{fancyvrb}
+\usepackage{calc}
+\usepackage{tikz}
+\usepackage{svg}
+\usepackage{longtable}
+\usepackage{fontspec}
+\usepackage{layout}
+\usepackage{geometry}
+\usepackage{environ}
+\usepackage{marginnote}
+\usepackage{tcolorbox}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{minted}
+
 \newcommand{\VerbBar}{|}
 \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
 \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
@@ -99,7 +113,6 @@
 
 % New Pandocbounded command
 $if(graphics)$
-\usepackage{graphicx}
 \makeatletter
 \newsavebox\pandoc@box
 \newcommand*\pandocbounded[1]{% scales image to fit in text height/width
@@ -116,23 +129,6 @@ $if(graphics)$
 \makeatother
 $endif$
 
-\usepackage{calc}
-%Custom settings start here
-\newcommand{\pandocbounded}[1]{#1}
-
-
-\usepackage{tikz}
-\usepackage{svg}
-\usepackage{longtable}
-\usepackage{fontspec}
-\usepackage{layout}
-\usepackage{geometry}
-\usepackage{environ}
-\usepackage{marginnote}
-\usepackage{tcolorbox}
-\usepackage{tabularx}
-\usepackage{booktabs}
-\usepackage{minted}
 \definecolor{mbg}{rgb}{0.95, 0.95, 0.95}
 
 \setmainfont{Atkinson Hyperlegible}[]
@@ -209,7 +205,7 @@ $endif$
 \titleformat{\chapter}[display]
     {\LARGE}
     {}
-    {20pt}
+    {0pt}
     {\titlerule\vspace{2pt}\MakeUppercase}
     [\vspace{2pt}\titlerule]
 
