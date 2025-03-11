@@ -183,13 +183,15 @@
     }
 }
 
+\usepackage{titlesec}
 
-\let\osection\section
+\titleformat{\chapter}[display]
+    {\LARGE}
+    {}
+    {20pt}
+    {\titlerule\vspace{2pt}\MakeUppercase}
+    [\vspace{2pt}\titlerule]
 
-\renewcommand{\section}[1]{
-    \newpage
-    \osection{#1}
-}
 
 \graphicspath{{$graphicspath$}}
 
