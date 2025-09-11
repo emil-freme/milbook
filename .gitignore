@@ -1,4 +1,17 @@
 .obsidian/
 _minted-out/
 config.ini
+# Python virtual environment
+venv/
+.venv/
+Scripts/
+lib/
+pyvenv.cfg
+
+# Python cache files
+__pycache__/
+*.pyc
+
+# Other common ignores
+.DS_Store
 

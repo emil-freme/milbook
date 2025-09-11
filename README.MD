@@ -92,6 +92,12 @@ If you find a bug or have a feature request, please open an issue in the GitHub 
 Thank you for contributing to MilBook! Your help is greatly appreciated.
 
 
+## WIP: UPDATES
+
+Right now I'm updating to use a more robust GUI with Pyside6
+
+![](attachments\v0_pyside.png)
+
 ## License
 
 MilBook is open-source and licensed under the MIT License.
