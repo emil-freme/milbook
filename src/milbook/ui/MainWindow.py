@@ -14,11 +14,19 @@ class MainWindow(QMainWindow):
         self.main = QHBoxLayout()
         self.wrapper.setLayout(self.main)
         self.setCentralWidget(self.wrapper)
-        self._create_menus()
-        self._project_settings_ui()
 
         self.selected_type = None
         self.project_path = None
+
+        self.source_path_input = QLineEdit()
+        self.dest_path_input = QLineEdit()
+        self.out_name_input = QLineEdit()
+        self.author_name_input = QLineEdit()
+        self.tile_input = QLineEdit()
+        self.date_input = QLineEdit()
+
+        self._create_menus()
+        self._project_settings_ui()
         pass
 
 
@@ -30,9 +38,9 @@ class MainWindow(QMainWindow):
     def _file_menu(self, mb):
         file_menu = mb.addMenu("File")
         new_project = QAction("New Project", self)
-        new_project.triggered.connect(self.newProject)
+        # new_project.triggered.connect(self.newProject)
         load_project = QAction("Load Project", self)
-        load_project.triggered.connect(self.loadProject)
+        # load_project.triggered.connect(self.loadProject)
         file_menu.addAction(new_project)
         file_menu.addAction(load_project)
         pass
@@ -44,24 +52,24 @@ class MainWindow(QMainWindow):
 
         icon = self.style().standardIcon(QStyle.StandardPixmap.SP_DirOpenIcon)
         source_path = QHBoxLayout()
-        source_path.addWidget(QLineEdit())
+        source_path.addWidget(self.source_path_input)
         source_path.addWidget(QPushButton(icon, ""))
         
         dest_path = QHBoxLayout()
-        dest_path.addWidget(QLineEdit())
+        dest_path.addWidget(self.dest_path_input)
         dest_path.addWidget(QPushButton(icon, ""))
 
 
         file_settings_form.addRow("Source Path", source_path)
         file_settings_form.addRow("Destination Path", dest_path)
-        file_settings_form.addRow("File Name", QLineEdit())
+        file_settings_form.addRow("File Name", self.out_name_input)
         file_settings_group.setLayout(file_settings_form)
 
         project_settings_group = QGroupBox("Project Settings")
         project_settings_form = QFormLayout()
-        project_settings_form.addRow("Title", QLineEdit())
-        project_settings_form.addRow("Author", QLineEdit())
-        project_settings_form.addRow("Date", QLineEdit())
+        project_settings_form.addRow("Title", self.tile_input)
+        project_settings_form.addRow("Author", self.author_name_input)
+        project_settings_form.addRow("Date", self.date_input)
         project_settings_group.setLayout(project_settings_form)
 
         settings_layout = QVBoxLayout()
@@ -83,25 +91,13 @@ class MainWindow(QMainWindow):
 
         pass
 
-    def newProject(self):
-        project_path = QFileDialog.getExistingDirectory(self,
-                               "Selecinar Pasta do Projeto",
-                               "~"
-                               )
-        if (project_path):
-            self.selected_type = "new"
-            self.selected_path = project_path
-            self.accept()
-        pass
+    def reload_ui(self, project_data):
+        self.source_path_input.setText(project_data.src_path)
+        self.dest_path_input.setText(project_data.out_path)
+        self.out_name_input.setText(project_data.out_name)
+        self.author_name_input.setText(project_data.author_name)
+        self.tile_input.setText(project_data.project_title)
+        self.date_input.setText(project_data.project_date)
 
-    def loadProject(self):
-        project_path = QFileDialog.getOpenFileName(self,
-                                                   "Selecinar Projeto",
-                                                   "~", 
-                                                   "Projeto (*.mil *.ini)"
-                                                   )
-        if (project_path):
-            self.selected_type = "load"
-            self.selected_path = project_path
-            self.accept()
-        pass
+
+

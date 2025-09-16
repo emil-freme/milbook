@@ -1,55 +1,80 @@
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, Signal
 from PySide6.QtWidgets import (
     QDialog, QPushButton, QHBoxLayout, QVBoxLayout, QListView,
     QFileDialog
 )
 
+from ..core.data import ProjectData
+
 
 class WelcomeDialog(QDialog):
     def __init__(self):
         super().__init__(None)
-        self.selected_type = None
-        self.selected_path = None
+
         self.setWindowFlags(Qt.WindowType.Dialog |
                             Qt.WindowType.FramelessWindowHint
                             )
-        self.main_layout = QHBoxLayout(self)
+
         self.btns = QVBoxLayout()
+
         self.btn_new = QPushButton("New Project")
-        self.btn_load = QPushButton("Load Project")
-        self.btn_close = QPushButton("Close")
         self.btns.addWidget(self.btn_new)
+        
+        self.btn_load = QPushButton("Load Project")
         self.btns.addWidget(self.btn_load)
+        
+        self.btn_close = QPushButton("Close")
         self.btns.addWidget(self.btn_close)
+
         self.btns.addStretch()
+
         self.projec_list = QListView()
+
+        self.main_layout = QHBoxLayout(self)
         self.main_layout.addLayout(self.btns)
         self.main_layout.addWidget(self.projec_list)
+        
+        self.bind_buttons()
+        self.projectData = ProjectData()
         pass
 
-    def newProject(self):
-        project_path = QFileDialog.getExistingDirectory(self,
-                               "Selecinar Pasta do Projeto",
-                               "~"
-                               )
-        if (project_path):
-            self.selected_type = "new"
-            self.selected_path = project_path
-            self.accept()
-        pass
+    def bind_buttons(self):
+ 
+        self.btn_close.clicked.connect(self.on_close)
 
-    def loadProject(self):
-        project_path = QFileDialog.getOpenFileName(self,
-                                                   "Selecinar Projeto",
-                                                   "~", 
-                                                   "Projeto (*.mil *.ini)"
-                                                   )
-        if (project_path):
-            self.selected_type = "load"
-            self.selected_path = project_path
-            self.accept()
-        pass
+        self.btn_load.clicked.connect(self.on_load_click)
 
-    def close(self):
+        self.btn_new.clicked.connect(self.on_new_click)
+
+    def on_close(self):
         self.reject()
+        pass
+
+    def on_load_click(self):
+        fileName, _ = QFileDialog.getOpenFileName(self,
+                 "Selecione o arquivo do projeto",
+                 "~",
+                 "Milbook Project Files (*.mil);;Legacy Config Files (*.ini)"
+                 )
+
+        if (fileName is not None):
+            self.reject()
+        self.projectData.project_settings = fileName
+        self.accept()
+
+        pass
+
+    
+    def on_new_click(self):
+        dirName = QFileDialog.getExistingDirectory(self,
+                 "Selecione o diretório do projeto",
+                 "~",
+                 )
+
+        if (dirName is not None):
+            self.reject()
+
+        self.projectData.src_path = dirName
+        self.accept()
+
         pass
