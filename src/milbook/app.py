@@ -4,21 +4,24 @@ import sys
 from PySide6.QtWidgets import (
     QApplication,
 )
-
-from WelcomeDialog import WelcomeDialog
-from MainWindow import MainWindow
+from .core.project_handler import ProjectLoader
+from .ui.WelcomeDialog import WelcomeDialog
+from .ui.MainWindow import MainWindow
 
 
 class Milbook():
 
     def __init__(self):
         self.app = QApplication(sys.argv)
-        self.main_window = None
-        self.project = None
+        self.main_window = MainWindow()
+        self.welcome_window = WelcomeDialog()
+        self.project_path = None
+        self.connect_actions()
         pass
 
+
+
     def run(self):
-        self.main_window = MainWindow()
         self.main_window.show()
 
         welcomeDialog = WelcomeDialog()
@@ -30,6 +33,3 @@ class Milbook():
         pass
 
 
-if __name__ == "__main__":
-    app = Milbook()
-    app.run()

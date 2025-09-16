@@ -1,7 +1,7 @@
 from PySide6.QtGui import QAction
 from PySide6.QtWidgets import (
     QMainWindow, QWidget, QLineEdit, QGroupBox, QFormLayout, QVBoxLayout,
-    QHBoxLayout, QStyle, QPushButton, QListView
+    QHBoxLayout, QStyle, QPushButton, QListView, QFileDialog
 )
 
 
@@ -16,6 +16,9 @@ class MainWindow(QMainWindow):
         self.setCentralWidget(self.wrapper)
         self._create_menus()
         self._project_settings_ui()
+
+        self.selected_type = None
+        self.project_path = None
         pass
 
 
@@ -27,7 +30,9 @@ class MainWindow(QMainWindow):
     def _file_menu(self, mb):
         file_menu = mb.addMenu("File")
         new_project = QAction("New Project", self)
+        new_project.triggered.connect(self.newProject)
         load_project = QAction("Load Project", self)
+        load_project.triggered.connect(self.loadProject)
         file_menu.addAction(new_project)
         file_menu.addAction(load_project)
         pass
@@ -76,4 +81,27 @@ class MainWindow(QMainWindow):
 
 
 
+        pass
+
+    def newProject(self):
+        project_path = QFileDialog.getExistingDirectory(self,
+                               "Selecinar Pasta do Projeto",
+                               "~"
+                               )
+        if (project_path):
+            self.selected_type = "new"
+            self.selected_path = project_path
+            self.accept()
+        pass
+
+    def loadProject(self):
+        project_path = QFileDialog.getOpenFileName(self,
+                                                   "Selecinar Projeto",
+                                                   "~", 
+                                                   "Projeto (*.mil *.ini)"
+                                                   )
+        if (project_path):
+            self.selected_type = "load"
+            self.selected_path = project_path
+            self.accept()
         pass
