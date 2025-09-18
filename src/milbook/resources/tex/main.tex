@@ -55,7 +55,7 @@
 \usepackage{tcolorbox}
 \usepackage{tabularx}
 \usepackage{booktabs}
-\usepackage{minted}
+\usepackage{minted2}
 
 \newcommand{\VerbBar}{|}
 \newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
@@ -138,7 +138,8 @@ $endif$
             breakanywhere,
             bgcolor=mbg,
             linenos,
-            numbersep=1mm}
+            numbersep=1mm,
+            }
 
 
 
@@ -212,6 +213,26 @@ $endif$
 
 \graphicspath{{$graphicspath$}}
 
+
+\newtcolorbox{blackboard}{
+    colback=green!30!black, % A dark green
+    coltext=white,
+    colframe=brown,
+    boxrule=4pt,
+    arc=0mm,                % Sharp corners
+    center,
+}
+
+\let\oldDisplayMath\[
+\renewcommand{\[}{\begin{blackboard}\oldDisplayMath}
+\let\oldEndDisplayMath\]
+\renewcommand{\]}{\oldEndDisplayMath\end{blackboard}}
+
+ %\usepackage[cal=bickhams,calscaled=.96]{mathalpha}
+ \setmathfont{STIX Two Math}
+ \newfontfamily{\mathtextfont}{Caveat}
+ % In your preamble, after the line above
+\newcommand{\mtext}[1]{{\mathtextfont\text{#1}}}
 
 \begin{document}
 

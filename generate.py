@@ -57,6 +57,7 @@ print("Generating Tex File")
 subprocess.run(["pandoc", 
                 "--lua-filter", "lib/div2latexenv.lua",
 		        "--lua-filter", "lib/minted.lua",
+		        # "--lua-filter", "lib/blackboardEnv.lua",
 		        "--template", "lib/main.tex",
                 "--variable", f"graphicspath={src_path_latexed}",
                 "--metadata", f"author={author}",
