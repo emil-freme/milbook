@@ -4,7 +4,6 @@ import sys
 from PySide6.QtWidgets import (
     QApplication, QDialog
 )
-from .core.project_handler import ProjectLoader
 from .core.data import ProjectData
 from .ui.WelcomeDialog import WelcomeDialog
 from .ui.MainWindow import MainWindow
